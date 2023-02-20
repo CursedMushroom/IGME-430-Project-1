@@ -1,0 +1,26 @@
+{
+  "name": "igme-430-project-1",
+  "version": "1.0.0",
+  "description": "Project 1 IGME 430",
+  "main": "./src/server.js",
+  "scripts": {
+    "start":"node ./src/server.js",
+    "pretest":"eslint ./src --fix",
+    "test": "echo \"Tests complete\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CursedMushroom/IGME-430-Project-1.git"
+  },
+  "author": "Olivia Lewis",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/CursedMushroom/IGME-430-Project-1/issues"
+  },
+  "homepage": "https://github.com/CursedMushroom/IGME-430-Project-1#readme",
+  "devDependencies": {
+    "eslint": "^8.34.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.27.5"
+  }
+}
