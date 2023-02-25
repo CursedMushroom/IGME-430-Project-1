@@ -1,0 +1,58 @@
+/* colors
+rgb(26,20,35) //black
+rgb(55,37,73) //dark purple
+rgb(119,76,96) //mid purple
+rgb(183,93,105) //redwood
+rgb(234,205,194) //pale yellow */
+
+body {
+    background-color: rgb(55, 37, 73);
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.nav {
+    background-color: rgb(119, 76, 96);
+    overflow: hidden;
+}
+
+.nav a {
+    float: left;
+    color: rgb(234, 205, 194);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+
+
+    border-bottom: 7px solid transparent;
+    transition: border-bottom .3s ease-in;
+}
+
+.nav a:hover {
+    border-bottom: 7px solid rgb(183, 93, 105);
+}
+
+.nav a.active {
+    background-color: rgb(183, 93, 105);
+    color: rgb(26, 20, 35);
+}
+
+#home-button {
+    border: 2px solid rgb(183, 93, 105);
+    background-color:rgb(234,205,194) ;
+    
+    padding: 16px 36px;
+    
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 0 rgb(183, 93, 105);
+    
+    transition: ease-in-out 0.7s;
+
+}
+
+#home-button:hover {
+    box-shadow: inset 400px 0 0 0 rgb(183, 93, 105);
+}

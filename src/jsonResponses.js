@@ -9,33 +9,50 @@
 
 // },{...},};
 
-let library={};
+const library = {};
 
-//respondJSON
-const respondJSON=(request,response, status, object)=>{
-    const headers={
-        'Content-Type': 'application/json',
-    };
+const respondJSON = (request, response, status, object) => {
+  const headers = {
+    'Content-Type': 'application/json',
+  };
 
-    response.writeHead(status,headers);
-    response.write(JSON.stringify(object));
-    response.end();
-}
+  response.writeHead(status, headers);
+  response.write(JSON.stringify(object));
+  response.end();
+};
 
-//addData/editData //400/201/200/204
+const respondJSONMeta = (request, response, status) => {
+  const headers = {
+    'Content-Type': 'application/json',
+  };
 
-//getData //200
+  response.writeHead(status, headers);
+  response.end();
+};
 
-//notFound//404
-const notFound=(request,response)=>{
-    const responseJSON={
-        message:'The page youre looking for was not found.',
-        id:'notFound'
-    };
+const getLibrary = (request, response) => {
+  const responseJSON = {
+    library,
+  };
+  return respondJSON(request, response, 200, responseJSON);
+};
 
-    return respondJSON(request,response,404,responseJSON);
-}
+const getLibraryMeta = (request, response) => respondJSONMeta(request, response, 200);
 
-module.exports={
-    notFound,
+const notFound = (request, response) => {
+  const responseJSON = {
+    message: 'The page you are looking for was not found.',
+    id: 'notFound',
+  };
+
+  return respondJSON(request, response, 404, responseJSON);
+};
+
+const notFoundMeta = (request, response) => respondJSONMeta(request, response, 404);
+
+module.exports = {
+  getLibrary,
+  getLibraryMeta,
+  notFound,
+  notFoundMeta,
 };
