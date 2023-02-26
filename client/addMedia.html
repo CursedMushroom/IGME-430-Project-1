@@ -4,13 +4,107 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Phudu&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./style.css">
     <title>Add New Media</title>
 </head>
 
 <body>
-    <h1>adding media page</h1>
+    <div class="nav">
+        <a href="/">Home</a>
+        <a class="active" href="/addMedia">Add Media</a>
+        <a href="/library">Library</a>
+    </div>
+    <div class="media-contain">
+
+        <div class="col-1">
+            <a href="https://placeholder.com"><img src="https://via.placeholder.com/200" width="100%"
+                    id="title-img"></a>
+            <div class="small-img-row">
+
+                <div class="small-img-col">
+                    <a href="https://placeholder.com"><img src="https://via.placeholder.com/200" width="100%"
+                            class="small-img"></a>
+                </div>
+                <div class="small-img-col">
+                    <a href="https://placeholder.com"><img src="https://via.placeholder.com/200" width="100%"
+                            class="small-img"></a>
+                </div>
+                <div class="small-img-col">
+                    <a href="https://placeholder.com"><img src="https://via.placeholder.com/200" width="100%"
+                            class="small-img"></a>
+                </div>
+                <div class="small-img-col">
+                    <a href="https://placeholder.com"><img src="https://via.placeholder.com/200" width="100%"
+                            class="small-img"></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <div id="media-form">
+                <form>
+                    <input type="text" id="title" name="title" placeholder="Title of Media">
+
+                    <h3 id="media-title">Type</h3>
+                    <div id="media-type">
+
+                        <ul class="type-list">
+                            <li><input type="radio" name="med-type" id="film"><label for="film">Film Type 1</label></li>
+                            <li><input type="radio" name="med-type" id="film1"><label for="film1">Film Type 2</label>
+                            </li>
+                            <li><input type="radio" name="med-type" id="film2"><label for="film2">Film Type 3</label>
+                            </li>
+                            <li><input type="radio" name="med-type" id="film3"><label for="film3">Film Type 4</label>
+                            </li>
+
+
+                        </ul>
+                    </div>
+
+                    <h3 id="media-title">Personal Progress</h3>
+                    <div id="media-progress">
+                        <input type="radio" id="finsihed" name="med-progress" value="finsihed">
+                        <label for="finsihed">Finished</label><br>
+                        <input type="radio" id="ongoing" name="med-progress" value="ongoing">
+                        <label for="ongoing">Ongoing/Watching</label><br>
+                        <input type="radio" id="dropped" name="med-progress" value="dropped">
+                        <label for="dropped">Dropped</label>
+                    </div>
+
+
+                    <div class="genre-container">
+                        <h3 id="media-title">Genres</h3>
+                        <ul class="genre-list">
+                            <li><input type="checkbox" id="1" value="Genre 1"><label for="1">Genre 1</label></li>
+                            <li><input type="checkbox" id="2" value="Genre 2"><label for="2">Genre 2</label></li>
+                            <li><input type="checkbox" id="3" value="Genre 3"><label for="3">Genre 3</label></li>
+                            <li><input type="checkbox" id="4" value="Genre 4"><label for="4">Genre 4</label></li>
+                            <li><input type="checkbox" id="5" value="Genre 5"><label for="5">Genre 5</label></li>
+
+                        </ul>
+                    </div>
+
+                    <h3 id="media-title">Rating</h3>
+                    <div id="media-progress">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid laudantium necessitatibus
+                            voluptatibus fugiat quod id at hic, qui dicta iste.</p>
+                    </div>
+
+                    <textarea id="media-notes" name="text" rows="10" cols="110"
+                        placeholder="Extra Thoughts or Notes"></textarea>
+                </form>
+            </div>
+
+            <button onclick="window.location.href='app.html'" id="media-stop-button">Cancel</button>
+            <button onclick="window.location.href='app.html'" id="media-add-button">Sumbit/Add</button>
+        </div>
+
+    </div>
+
 </body>
 
 </html>
