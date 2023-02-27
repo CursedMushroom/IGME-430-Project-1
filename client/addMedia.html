@@ -28,10 +28,10 @@
             const nameAction = document.querySelector('#media-add-button').value;
             const nameMethod = 'post';
 
-            const titlField = mediaForm.querySelector('#title');
+            const titleField = mediaForm.querySelector('#title');
             
 
-            const formData = `name=${titlField.value}`;
+            const formData = `title=${titleField.value}`;
             let response = await fetch(nameAction, {
                 method: nameMethod,
                 headers: {
