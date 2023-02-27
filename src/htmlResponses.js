@@ -6,6 +6,8 @@ const libraryPage = fs.readFileSync(`${__dirname}/../client/library.html`);
 const mediaPage = fs.readFileSync(`${__dirname}/../client/addMedia.html`);
 // css
 const css = fs.readFileSync(`${__dirname}/../client/style.css`);
+// js
+const photoSelect = fs.readFileSync(`${__dirname}/../client/src/photo-select.js`);
 
 const getIndex = (request, response) => {
   response.writeHead(200, { 'Content-Type': 'text/html' });
@@ -31,9 +33,16 @@ const getCSS = (request, response) => {
   response.end();
 };
 
+const getPhotoSelect = (request, response) => {
+  response.writeHead(200, { 'Content-Type': 'application/javascript' });
+  response.write(photoSelect);
+  response.end();
+};
+
 module.exports = {
   getIndex,
   getLibrary,
   getMediaPage,
   getCSS,
+  getPhotoSelect,
 };

@@ -30,14 +30,12 @@ const respondJSONMeta = (request, response, status) => {
   response.end();
 };
 
-
-
 const addMedia = (request, response, body) => {
   const responseJSON = {
     message: 'Title, Media Type and Progress Required.',
   };
 
-  if (!body.title ) {//|| !body.type || !body.progress
+  if (!body.title) { // || !body.type || !body.progress
     responseJSON.id = 'missingParams';
     return respondJSON(request, response, 400, responseJSON);
   }
@@ -50,7 +48,7 @@ const addMedia = (request, response, body) => {
   }
 
   library[body.title].title = body.title;
-  //library[body.title].age = body.age;
+  // library[body.title].age = body.age;
 
   if (responseCode === 201) {
     responseJSON.message = 'created successfully';
@@ -59,7 +57,6 @@ const addMedia = (request, response, body) => {
   console.log(library);
   return respondJSONMeta(request, response, responseCode);
 };
-
 
 const getLibrary = (request, response) => {
   const responseJSON = {

@@ -28,10 +28,27 @@
             const nameAction = document.querySelector('#media-add-button').value;
             const nameMethod = 'post';
 
-            const titleField = mediaForm.querySelector('#title');
-            
+            const titleField = mediaForm.querySelector('#title').value;
+            const typeField = mediaForm.querySelector('input[name="med-type"]:checked').value;
+            const genreField = mediaForm.querySelectorAll("input[type=checkbox]:checked");
+            const progressField = mediaForm.querySelector('input[name="med-progress"]:checked').value;
+            const addNotes = mediaForm.querySelector('#media-notes').value;
+            const img = mediaForm.querySelector('#title-img').src;
 
-            const formData = `title=${titleField.value}`;
+
+
+            let finalGenres = [];
+
+            for (let i = 0; i < genreField.length; i++) finalGenres.push(genreField[i].value)
+
+
+            const formData = `
+            title=${titleField}&
+            type=${typeField}&
+            genre=${finalGenres}&
+            progress=${progressField}&
+            notes=${addNotes}`;
+
             let response = await fetch(nameAction, {
                 method: nameMethod,
                 headers: {
@@ -42,40 +59,39 @@
             });
             handleResponse(response);
         };
+        const clearFields = () => {
 
+            let title = document.querySelector('#title');
+            let genres = document.querySelectorAll("input[type=checkbox]:checked");
+            let type = document.querySelector('input[name="med-type"]:checked');
+            let progress = document.querySelector('input[name="med-progress"]:checked');
+            let notes = document.querySelector('#media-notes');
+
+
+
+            title.value = '';
+            for (let i = 0; i < genres.length; i++) genres[i].checked = false;
+            if (type != null) type.checked = false;
+            if (progress != null) progress.checked = false;
+            notes.value = "";
+
+        };
 
         const init = () => {
 
             const submitButton = document.querySelector('#media-add-button');
             const clearButton = document.querySelector('#media-stop-button');
             const mediaForm = document.querySelector('.media-contain');
-            console.log(clearButton);
-            const clearButtonSumbit = () => {
-                console.log("clear");
-
-                let title = document.querySelector('#title');
-                let genres = document.querySelectorAll("input[type=checkbox]:checked");
-                let type = document.querySelector('input[name="med-type"]:checked');
-                let progress = document.querySelector('input[name="med-progress"]:checked');
-                let notes=document.querySelector('#media-notes');
-    
-
-                title.value='';
-                for (let i = 0; i < genres.length; i++) genres[i].checked = false;
-                if(type!=null)type.checked = false;
-                if(progress!=null)progress.checked=false;
-                notes.value = "";
-
-            };
 
             const submitButtonSumbit = (e) => {
-                
+
                 e.preventDefault();
                 sendPost(mediaForm);
+                clearFields();
 
                 return false;//prevents event bubbling
             };
-            clearButton.addEventListener('click', clearButtonSumbit);
+            clearButton.addEventListener('click', clearFields);
             submitButton.addEventListener('click', submitButtonSumbit);
 
         };
@@ -120,12 +136,16 @@
                     <div id="media-type">
 
                         <ul class="type-list">
-                            <li><input type="radio" name="med-type" id="film"><label for="film">Film Type 1</label></li>
-                            <li><input type="radio" name="med-type" id="film1"><label for="film1">Film Type 2</label>
+                            <li><input type="radio" name="med-type" id="film1" value="film1"><label for="film1">Film
+                                    Type 1</label></li>
+                            <li><input type="radio" name="med-type" id="film2" value="film2"><label for="film2">Film
+                                    Type 2</label>
                             </li>
-                            <li><input type="radio" name="med-type" id="film2"><label for="film2">Film Type 3</label>
+                            <li><input type="radio" name="med-type" id="film3" value="film3"><label for="film3">Film
+                                    Type 3</label>
                             </li>
-                            <li><input type="radio" name="med-type" id="film3"><label for="film3">Film Type 4</label>
+                            <li><input type="radio" name="med-type" id="film4" value="film4"><label for="film4">Film
+                                    Type 4</label>
                             </li>
 
 
@@ -172,26 +192,9 @@
 
     </div>
 
+    <footer></footer>
 
-    <script>
-        let mainImg = document.getElementById("title-img");
-        let smallImg = document.getElementsByClassName("small-img");
-
-        smallImg[0].onclick = function () {
-            mainImg.src = smallImg[0].src;
-        }
-        smallImg[1].onclick = function () {
-            mainImg.src = smallImg[1].src;
-        }
-        smallImg[2].onclick = function () {
-            mainImg.src = smallImg[2].src;
-        }
-        smallImg[3].onclick = function () {
-            mainImg.src = smallImg[3].src;
-        }
-
-    </script>
-    <!-- <script type="module" src="src/photo-select.js"></script> -->
+    <script type="module" src="/photoSelect"></script>
 </body>
 
 </html>

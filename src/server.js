@@ -16,6 +16,8 @@ const urlStruct = {
     // media sent
     '/notFound': jsonHandler.notFound, // notFound/404
 
+    '/photoSelect': htmlHandler.getPhotoSelect,
+
     notFound: jsonHandler.notFound,
     index: htmlHandler.getIndex,
   },
