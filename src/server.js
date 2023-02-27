@@ -48,8 +48,8 @@ const parseBody = (request, response, handlerFunction) => {
 };
 
 const handlePost = (request, response, parsedUrl) => {
-  if (parsedUrl.pathname === '/addUser') {
-    parseBody(request, response, jsonHandler.addUser);
+  if (parsedUrl.pathname === '/submitMedia') {
+    parseBody(request, response, jsonHandler.addMedia);
   }
 };
 

@@ -30,6 +30,37 @@ const respondJSONMeta = (request, response, status) => {
   response.end();
 };
 
+
+
+const addMedia = (request, response, body) => {
+  const responseJSON = {
+    message: 'Title, Media Type and Progress Required.',
+  };
+
+  if (!body.title ) {//|| !body.type || !body.progress
+    responseJSON.id = 'missingParams';
+    return respondJSON(request, response, 400, responseJSON);
+  }
+
+  let responseCode = 204;
+
+  if (!library[body.title]) {
+    responseCode = 201;
+    library[body.title] = {};
+  }
+
+  library[body.title].title = body.title;
+  //library[body.title].age = body.age;
+
+  if (responseCode === 201) {
+    responseJSON.message = 'created successfully';
+    return respondJSON(request, response, responseCode, responseJSON);
+  }
+  console.log(library);
+  return respondJSONMeta(request, response, responseCode);
+};
+
+
 const getLibrary = (request, response) => {
   const responseJSON = {
     library,
@@ -51,6 +82,7 @@ const notFound = (request, response) => {
 const notFoundMeta = (request, response) => respondJSONMeta(request, response, 404);
 
 module.exports = {
+  addMedia,
   getLibrary,
   getLibraryMeta,
   notFound,
