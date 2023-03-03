@@ -25,29 +25,31 @@
         };
 
         const sendPost = async (mediaForm) => {
-            const nameAction = document.querySelector('#media-add-button').value;
+            const nameAction = '/submitMedia';
             const nameMethod = 'post';
 
-            const titleField = mediaForm.querySelector('#title').value;
-            const typeField = mediaForm.querySelector('input[name="med-type"]:checked').value;
+            const titleField = mediaForm.querySelector('#title').value;//req
+            const typeField = mediaForm.querySelector('input[name="med-type"]:checked');//req
             const genreField = mediaForm.querySelectorAll("input[type=checkbox]:checked");
-            const progressField = mediaForm.querySelector('input[name="med-progress"]:checked').value;
+            const progressField = mediaForm.querySelector('input[name="med-progress"]:checked');//req
             const addNotes = mediaForm.querySelector('#media-notes').value;
-            const img = mediaForm.querySelector('#title-img').src;
+            // const img = mediaForm.querySelector('#title-img').src||"";
 
 
 
             let finalGenres = [];
 
+
+            console.log(addNotes);
+
             for (let i = 0; i < genreField.length; i++) finalGenres.push(genreField[i].value)
 
 
-            const formData = `
-            title=${titleField}&
-            type=${typeField}&
-            genre=${finalGenres}&
-            progress=${progressField}&
-            notes=${addNotes}`;
+            const formData = `title=${titleField}&type=${typeField.value}&genres=${finalGenres}&notes=${addNotes}`;
+            // type=${typeField}&
+            // genre=${finalGenres}&
+            // progress=${progressField}&
+            // notes=${addNotes}
 
             let response = await fetch(nameAction, {
                 method: nameMethod,
@@ -97,6 +99,8 @@
         };
 
         window.onload = init;
+        //disble submit button if required fields are blank || title, type, progress
+        //create pop-up or go to new page when data is submitted
 
     </script>
 </head>
@@ -129,9 +133,9 @@
         </div>
         <div class="col-2">
             <div id="media-form">
+                <p id="form-info">Name, Media Type and Personal Progress are required!</p>
                 <form>
                     <input type="text" id="title" name="title" placeholder="Title of Media">
-
                     <h3 id="media-title">Type</h3>
                     <div id="media-type">
 
@@ -185,7 +189,6 @@
                         placeholder="Extra Thoughts or Notes"></textarea>
                 </form>
             </div>
-
             <button type="button" id="media-stop-button">Clear</button>
             <button type="button" value='/submitMedia' id="media-add-button">Sumbit/Add</button>
         </div>

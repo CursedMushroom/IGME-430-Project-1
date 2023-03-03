@@ -112,6 +112,8 @@ body {
     margin: 24px;
 }
 
+
+
 .col-1 {
     width: 35%;
     height: 100vh;
@@ -179,6 +181,21 @@ input[type=text]:focus {
     overflow-y: auto;
 
 
+}
+
+/* media form scrollbar */
+#media-form::-webkit-scrollbar-track {
+
+    background-color: rgba(234,205,194,.3);
+}
+
+#media-form::-webkit-scrollbar {
+    width: 6px;
+    background-color: rgba(234,205,194,.3);
+}
+
+#media-form::-webkit-scrollbar-thumb {
+    background-color: rgb(119,76,96);
 }
 
 /* Media Types */
@@ -310,3 +327,35 @@ ul.genre-list li input[type="checkbox"] {
 ul.genre-list li input[type="checkbox"]:focus+label {
     border: 2px solid rgb(234, 205, 194);
 }
+
+
+
+/* library Page */
+#search{
+   padding:32px;
+   background-color: rgb(234,205,194);
+    display: flex;
+    justify-content: space-around;
+}
+
+.search-cri{
+    width:200px;
+    height:40px;
+    background-color: rgb(183, 93, 105);
+    border: 2px solid rgb(119,76,96);
+    color: rgb(234, 205, 194);
+    border-radius: 5px;
+    padding: 0 0 0 .5em;
+    color: #fff;
+    cursor: pointer;
+   
+}
+
+.search-cri::-ms-expand {
+    display: none;
+}
+ 
+
+ 
+
+ 
