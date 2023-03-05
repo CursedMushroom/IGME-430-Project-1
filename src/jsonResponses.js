@@ -35,7 +35,7 @@ const addMedia = (request, response, body) => {
     message: 'Title, Media Type and Progress Required.',
   };
 
-  if (!body.title || !body.type) { // || !body.type || !body.progress
+  if (!body.title || !body.type || !body.progress) { 
     responseJSON.id = 'missingParams';
     return respondJSON(request, response, 400, responseJSON);
   }
@@ -49,8 +49,10 @@ const addMedia = (request, response, body) => {
 
   library[body.title].title = body.title;
   library[body.title].type = body.type;
+  library[body.title].img = body.img;
   if (body.genres && body.genres !== '') library[body.title].genres = body.genres;
   if (body.notes) library[body.title].notes = body.notes;
+  if (body.rating) library[body.title].notes = body.rating;
 
   if (responseCode === 201) {
     responseJSON.message = 'created successfully';

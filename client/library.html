@@ -11,45 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Phudu&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./style.css">
     <title>Library</title>
-    <script>
-        const handleResponse = async (response, parseResponse) => {
-            const content = document.querySelector('#results');
-            content.innerHTML = ``;
-            if (parseResponse) {
-                const obj = await response.json();
-                console.log(obj);
-                if (JSON.stringify(obj) == '{"library":{}}') {
-                    content.innerHTML = `
-                    <h3>Look like there is nothing in your library! Go to Add Media to fill your library!</h3>
-                     <button onclick="window.location.href='/addMedia'" id="home-button">To Add Media</button>`
-                } else {
-                    content.innerHTML += `<p>${JSON.stringify(obj)}</p>`
-                }
+    <script type="module" src="/card"></script>
 
-            } else {
-                content.innerHTML += `<p> Meta Data Recieved</p>`;
-            }
-        };
 
-        const requestUpdate = async () => {
-            const method = 'get';
-
-            let response = await fetch('/getLibrary', {
-                method,
-                headers: {
-                    'Accept': 'application/json'
-                },
-            });
-
-            handleResponse(response, method === 'get');
-        };
-
-        const init = () => {
-            requestUpdate();
-
-        };
-        window.onload = init;
-    </script>
 </head>
 
 
@@ -59,35 +23,113 @@
         <a href="/addMedia">Add Media</a>
         <a class="active" shref="/library">Library</a>
     </div>
-    <div id="search">
-        
-        <select id="" class="search-cri">
-            <option>op 1</option>
-            <option>op 2</option>
-            <option>op 3</option>
-        </select>
 
+    <h3 id="count"></h3>
 
-        
-        <select id="" class="search-cri">
-            <option>op 1</option>
-            <option>op 2</option>
-            <option>op 3</option>
-        </select>
+    <div id="results">
 
-        
-        <select id="" class="search-cri">
-            <option>op 1</option>
-            <option>op 2</option>
-            <option>op 3</option>
-        </select>
+        <div id="element-card-holder">
 
-        <button type="button"  id="search-button">temp</button>
-
-
-    </div>
-    <div id="results"><p>hello</p>
+        </div>
     </div>
 </body>
+
+<script>
+    const handleResponse = async (response, parseResponse) => {
+        const content = document.querySelector('#element-card-holder');
+        content.innerHTML = ``;
+        if (parseResponse) {
+            const obj = await response.json();
+            console.log(obj);
+
+
+            if (JSON.stringify(obj) == '{"library":{}}') {
+                content.innerHTML = `
+                <h3>Look like there is nothing in your library! Go to Add Media to fill your library!</h3>
+                 <button onclick="window.location.href='/addMedia'" id="home-button">To Add Media</button>`
+            } else {
+                content.innerHTML += `<p>${JSON.stringify(obj)}</p>`
+                let elementCardHolder = document.querySelector("#element-card-holder");
+                let counts = document.querySelector("#count");
+                document.querySelector("#element-card-holder").innerHTML = ``;
+
+
+                let item = obj[Object.keys(obj)[0]];//grabs data from this title
+                let count = Object.keys(item).length;
+                counts.innerHTML = `<h3>You have ${count} items in your library!</h3>`;
+
+                for (var k in item) {
+                    if (item.hasOwnProperty(k)) {
+                        //console.log("Key is " + k + ", value is " + item[k]);
+                        //console.log(item[k].title);
+                        let newCard = document.createElement("result-card");
+                        newCard.dataset.title = item[k].title;
+                        newCard.dataset.type = item[k].type;
+                        newCard.dataset.progress = item[k].progress;
+                        newCard.dataset.genres = item[k].genres;
+                        newCard.dataset.rating = item[k].rating;
+                        newCard.dataset.notes = item[k].notes;
+                        newCard.dataset.src = item[k].img;
+
+
+                        elementCardHolder.appendChild(newCard);
+                    }
+                }
+            }
+
+        } else {
+            content.innerHTML += `<p> Meta Data Recieved</p>`;
+        }
+
+    };
+
+    const requestUpdate = async () => {
+        const method = 'get';
+
+        let response = await fetch('/getLibrary', {
+            method,
+            headers: {
+                'Accept': 'application/json'
+            },
+        });
+
+        handleResponse(response, method === 'get');
+    };
+
+    const init = () => {
+        requestUpdate();
+
+    };
+
+
+    const finalCards = (obj) => {
+        let elementCardHolder = document.querySelector("#element-card-holder");
+        document.querySelector("#element-card-holder").innerHTML = ``;
+
+
+        let item = obj[Object.keys(obj)[0]];//grabs data from this title
+        let count = Object.keys(item).length;
+
+        for (var k in item) {
+            if (item.hasOwnProperty(k)) {
+                //console.log("Key is " + k + ", value is " + item[k]);
+                //console.log(item[k].title);
+                let newCard = document.createElement("result-card");
+                newCard.dataset.title = item[k].title;
+                newCard.dataset.type = item[k].type;
+                newCard.dataset.progress = item[k].progress;
+                newCard.dataset.genres = item[k].genres;
+                newCard.dataset.rating = item[k].rating || "";
+                newCard.dataset.notes = item[k].notes || "";
+                newCard.dataset.src = item[k].img || "images/blankCard.jpg";
+
+
+                elementCardHolder.appendChild(newCard);
+            }
+        }
+
+    }
+    init();
+</script>
 
 </html>

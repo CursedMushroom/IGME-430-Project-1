@@ -14,18 +14,17 @@
 
     <script>
         const handleResponse = async (response, parseResponse) => {
-           
-           
             if (parseResponse) {
                 const obj = await response.json();
                 console.log(JSON.stringify(obj));
             } else {
                 console.log('Meta Data Recieved');
             }
+            popUp();
         };
 
         const sendPost = async (mediaForm) => {
-            //popUp();
+
             const nameAction = '/submitMedia';
             const nameMethod = 'post';
 
@@ -35,7 +34,7 @@
             const progressField = mediaForm.querySelector('input[name="med-progress"]:checked');//req
             const ratingField = mediaForm.querySelectorAll('input[name="med-rating"]');
             const addNotes = mediaForm.querySelector('#media-notes').value;
-            // const img = mediaForm.querySelector('#title-img').src||"";
+            const img = mediaForm.querySelector('#title-img').src;
 
 
 
@@ -50,10 +49,8 @@
                 if (ratingField[i].checked) finalRating = ratingField[i].value;
             }
 
-            const formData = `title=${titleField}&type=${typeField.value}&genres=${finalGenres}&notes=${addNotes}`;
+            const formData = `title=${titleField}&type=${typeField.value}&genres=${finalGenres}&progress=${progressField.value}&rating=${finalRating}&notes=${addNotes}&img=${img}`;
 
-
-            // progress=${progressField}&
 
             let response = await fetch(nameAction, {
                 method: nameMethod,
@@ -168,16 +165,20 @@
             <div class="small-img-row">
 
                 <div class="small-img-col">
-                    <a><img src="https://people.rit.edu/osl2877/430/Illustration4.jpg" width="100%" class="small-img"></a>
+                    <a><img src="https://people.rit.edu/osl2877/430/Illustration4.jpg" width="100%"
+                            class="small-img"></a>
                 </div>
                 <div class="small-img-col">
-                    <a><img src="https://people.rit.edu/osl2877/430/Illustration.jpg" width="100%" class="small-img"></a>
+                    <a><img src="https://people.rit.edu/osl2877/430/Illustration.jpg" width="100%"
+                            class="small-img"></a>
                 </div>
                 <div class="small-img-col">
-                    <a><img src="https://people.rit.edu/osl2877/430/Illustration2.jpg" width="100%" class="small-img"></a>
+                    <a><img src="https://people.rit.edu/osl2877/430/Illustration2.jpg" width="100%"
+                            class="small-img"></a>
                 </div>
                 <div class="small-img-col">
-                    <a><img src="https://people.rit.edu/osl2877/430/Illustration3.jpg" width="100%" class="small-img"></a>
+                    <a><img src="https://people.rit.edu/osl2877/430/Illustration3.jpg" width="100%"
+                            class="small-img"></a>
                 </div>
             </div>
         </div>
@@ -190,17 +191,18 @@
                     <div id="media-type">
 
                         <ul class="type-list">
-                            <li><input type="radio" name="med-type" id="film1" value="film1"><label for="film1">Film
-                                    Type 1</label></li>
-                            <li><input type="radio" name="med-type" id="film2" value="film2"><label for="film2">Film
-                                    Type 2</label>
-                            </li>
-                            <li><input type="radio" name="med-type" id="film3" value="film3"><label for="film3">Film
-                                    Type 3</label>
-                            </li>
-                            <li><input type="radio" name="med-type" id="film4" value="film4"><label for="film4">Film
-                                    Type 4</label>
-                            </li>
+                            <li><input type="radio" name="med-type" id="film" value="film"><label
+                                    for="film">Film</label></li>
+                            <li><input type="radio" name="med-type" id="series" value="series"><label
+                                    for="series">Series</label></li>
+                            <li><input type="radio" name="med-type" id="show" value="show"><label
+                                    for="show">Show</label></li>
+                            <li><input type="radio" name="med-type" id="movie" value="movie"><label
+                                    for="movie">Movie</label></li>
+                            <li><input type="radio" name="med-type" id="web-series" value="web-series"><label
+                                    for="web-series">Web-Series</label></li>
+                            <li><input type="radio" name="med-type" id="other" value="other"><label
+                                    for="other">Other</label></li>
                         </ul>
                     </div>
 
@@ -226,11 +228,35 @@
                     <div class="genre-container">
                         <h3 id="media-title">Genres</h3>
                         <ul class="genre-list">
-                            <li><input type="checkbox" id="1" value="Genre 1"><label for="1">Genre 1</label></li>
-                            <li><input type="checkbox" id="2" value="Genre 2"><label for="2">Genre 2</label></li>
-                            <li><input type="checkbox" id="3" value="Genre 3"><label for="3">Genre 3</label></li>
-                            <li><input type="checkbox" id="4" value="Genre 4"><label for="4">Genre 4</label></li>
-                            <li><input type="checkbox" id="5" value="Genre 5"><label for="5">Genre 5</label></li>
+                            <li><input type="checkbox" id="1" value="Action"><label for="1">Action</label></li>
+                            <li><input type="checkbox" id="2" value="Adventure"><label for="2">Adventure</label></li>
+                            <li><input type="checkbox" id="3" value="Animation"><label for="3">Animation</label></li>
+                            <li><input type="checkbox" id="4" value="Biography"><label for="4">Biography</label></li>
+                            <li><input type="checkbox" id="5" value="Comedy"><label for="5">Comedy</label></li>
+                            <li><input type="checkbox" id="6" value="Crime"><label for="6">Crime</label></li>
+                            <li><input type="checkbox" id="7" value="Documentary"><label for="7">Documentary</label>
+                            </li>
+                            <li><input type="checkbox" id="8" value="Drama"><label for="8">Drama</label></li>
+                            <li><input type="checkbox" id="9" value="Family"><label for="9">Family</label></li>
+                            <li><input type="checkbox" id="10" value="Fantasy"><label for="10">Fantasy</label></li>
+                            <li><input type="checkbox" id="11" value="History"><label for="11">History</label></li>
+                            <li><input type="checkbox" id="12" value="Horror"><label for="12">Horror</label></li>
+                            <li><input type="checkbox" id="13" value="Kids"><label for="13">Kids</label></li>
+                            <li><input type="checkbox" id="14" value="Musical"><label for="14">Musical</label></li>
+                            <li><input type="checkbox" id="15" value="Mystery"><label for="15">Mystery</label></li>
+                            <li><input type="checkbox" id="16" value="Psychological"><label
+                                    for="16">Psychological</label></li>
+                            <li><input type="checkbox" id="17" value="Romance"><label for="17">Romance</label></li>
+                            <li><input type="checkbox" id="18" value="Sci-Fi"><label for="18">Sci-Fi</label></li>
+                            <li><input type="checkbox" id="19" value="Sport"><label for="19">Sport</label></li>
+                            <li><input type="checkbox" id="20" value="Thriller"><label for="20">Thriller</label></li>
+                            <li><input type="checkbox" id="21" value="War"><label for="21">War</label></li>
+                            <li><input type="checkbox" id="22" value="Western"><label for="22">Western</label></li>
+                            <li><input type="checkbox" id="23" value="Other"><label for="23">Other</label></li>
+
+
+
+
 
                         </ul>
                     </div>
@@ -238,20 +264,20 @@
                     <div class="rating-container">
                         <h3 id="media-title">Rating</h3>
                         <ul class="rating-list">
-                            <li><input type="radio" id="1start" name="med-rating" value="1start">
-                                <label for="1start">★</label>
+                            <li><input type="radio" id="★" name="med-rating" value="★">
+                                <label for="★">★</label>
                             </li>
-                            <li><input type="radio" id="2star" name="med-rating" value="2star">
-                                <label for="2star">★★</label>
+                            <li><input type="radio" id="★★" name="med-rating" value="★★">
+                                <label for="★★">★★</label>
                             </li>
-                            <li><input type="radio" id="3star" name="med-rating" value="3star">
-                                <label for="3star">★★★</label>
+                            <li><input type="radio" id="★★★" name="med-rating" value="★★★">
+                                <label for="★★★">★★★</label>
                             </li>
-                            <li><input type="radio" id="4star" name="med-rating" value="4star">
-                                <label for="4star">★★★★</label>
+                            <li><input type="radio" id="★★★★" name="med-rating" value="★★★★">
+                                <label for="★★★★">★★★★</label>
                             </li>
-                            <li><input type="radio" id="5star" name="med-rating" value="5star">
-                                <label for="5star">★★★★★</label>
+                            <li><input type="radio" id="★★★★★" name="med-rating" value="★★★★★">
+                                <label for="★★★★★">★★★★★</label>
                             </li>
 
                         </ul>
@@ -274,7 +300,8 @@
                 <p id="pop-text">Would you like to add another media? Or go to your library?</p>
                 <div id="pop-media-btns">
                     <button type="button" class='pop-media-btn' id="pop-media-add">Add More</button>
-                    <button type="button" class='pop-media-btn' id="pop-media-library">Library</button>
+                    <button type="button" class='pop-media-btn' id="pop-media-library"
+                        onclick="window.location.href='/library'">Library</button>
                 </div>
 
 
@@ -286,6 +313,7 @@
     <footer></footer>
 
     <script type="module" src="/photoSelect"></script>
+
 </body>
 
 </html>

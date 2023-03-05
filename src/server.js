@@ -18,6 +18,8 @@ const urlStruct = {
     '/notFound': jsonHandler.notFound, // notFound/404
 
     '/photoSelect': htmlHandler.getPhotoSelect,
+    '/app-footer': htmlHandler.getFooter,
+    '/card': htmlHandler.getCard,
 
     notFound: jsonHandler.notFound,
     index: htmlHandler.getIndex,

@@ -112,9 +112,68 @@ body {
     margin: 24px;
 }
 
-#form-info{
-    color:rgb(234, 205, 194);
+#form-info {
+    color: rgb(234, 205, 194);
     font-size: 18px;
+}
+
+#media-stop-button {
+    border: 2px solid rgb(234, 205, 194);
+    background-color: rgb(55, 37, 73);
+    color: rgb(234, 205, 194);
+
+    padding: 8px 12px;
+
+    font-family: 'Phudu', cursive;
+    font-weight: lighter;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 0 rgb(234, 205, 194);
+    transition: ease-in-out 0.7s;
+
+
+}
+
+#media-stop-button:hover {
+    color: rgb(55, 37, 73);
+    background-color: rgb(234, 205, 194);
+
+}
+
+#media-add-button {
+    border: 2px solid rgb(183, 93, 105);
+    background-color: rgb(234, 205, 194);
+    color: rgb(26, 20, 35);
+
+    padding: 8px 12px;
+
+    font-family: 'Phudu', cursive;
+    font-weight: lighter;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 0 rgb(183, 93, 105);
+
+    transition: ease-in-out 0.7s;
+
+
+}
+
+
+#media-add-button:hover:enabled {
+    box-shadow: inset 400px 0 0 0 rgb(183, 93, 105);
+}
+
+#media-add-button:disabled,
+#media-add-button[disabled] {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+}
+
+#media-add-button:disabled:hover {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
 }
 
 
@@ -210,7 +269,8 @@ ul.type-list {
 
 ul.type-list li {
     display: inline;
-    padding-right: 24px;
+    padding-right: 4px;
+
 
 
 }
@@ -218,7 +278,7 @@ ul.type-list li {
 ul.type-list li label {
     display: inline-block;
     text-align: center;
-    width: 16%;
+    width: 10%;
     background-color: rgb(183, 93, 105);
     color: rgb(234, 205, 194);
     border-radius: 5px;
@@ -407,7 +467,7 @@ ul.rating-list li label {
     text-align: center;
     width: 12%;
     font-size: 24px;
-   
+
     color: rgb(234, 205, 194);
     border-radius: 5px;
 
@@ -485,19 +545,19 @@ ul.rating-list li input[type="radio"] {
 
 }
 
-.popup.active #pop-title{
-   font-family: 'Phudu', cursive;
-   color:rgb(119,76,96);
+.popup.active #pop-title {
+    font-family: 'Phudu', cursive;
+    color: rgb(119, 76, 96);
 }
 
-.popup.active #pop-text{
-    color:rgb(183,93,105)
- }
+.popup.active #pop-text {
+    color: rgb(183, 93, 105)
+}
 
-.pop-media-btn{
-    border: 3px solid rgb(55,37,73);
+.pop-media-btn {
+    border: 3px solid rgb(55, 37, 73);
     background-color: rgb(234, 205, 194);
-    color: rgb(55,37,73);
+    color: rgb(55, 37, 73);
 
     padding: 12px 16px;
 
@@ -508,16 +568,17 @@ ul.rating-list li input[type="radio"] {
 
     transition: all 300ms ease-in-out;
 
- }
- .pop-media-btn:hover{
-    background-color: rgb(183,93,105);
-    color:rgb(234, 205, 194);
- }
+}
 
- #pop-media-btns{
+.pop-media-btn:hover {
+    background-color: rgb(183, 93, 105);
+    color: rgb(234, 205, 194);
+}
+
+#pop-media-btns {
     display: flex;
     justify-content: space-between;
- }
+}
 
 
 
@@ -545,4 +606,13 @@ ul.rating-list li input[type="radio"] {
 
 .search-cri::-ms-expand {
     display: none;
+}
+
+#element-card-holder {
+    overflow-y:auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 12px;
 }

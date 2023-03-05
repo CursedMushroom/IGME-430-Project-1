@@ -8,6 +8,8 @@ const mediaPage = fs.readFileSync(`${__dirname}/../client/addMedia.html`);
 const css = fs.readFileSync(`${__dirname}/../client/style.css`);
 // js
 const photoSelect = fs.readFileSync(`${__dirname}/../client/src/photo-select.js`);
+const footer= fs.readFileSync(`${__dirname}/../client/src/app-footer.js`);
+const card= fs.readFileSync(`${__dirname}/../client/src/card.js`);
 
 const getIndex = (request, response) => {
   response.writeHead(200, { 'Content-Type': 'text/html' });
@@ -39,10 +41,23 @@ const getPhotoSelect = (request, response) => {
   response.end();
 };
 
+const getFooter = (request, response) => {
+  response.writeHead(200, { 'Content-Type': 'application/javascript' });
+  response.write(footer);
+  response.end();
+};
+const getCard = (request, response) => {
+  response.writeHead(200, { 'Content-Type': 'application/javascript' });
+  response.write(card);
+  response.end();
+};
+
 module.exports = {
   getIndex,
   getLibrary,
   getMediaPage,
   getCSS,
   getPhotoSelect,
+  getFooter,
+  getCard
 };
