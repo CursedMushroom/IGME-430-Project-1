@@ -14,17 +14,18 @@
 
     <script>
         const handleResponse = async (response, parseResponse) => {
-            const content = document.querySelector('#temp');
-            content.innerHTML = `<p></p>`
+           
+           
             if (parseResponse) {
                 const obj = await response.json();
-                content.innerHTML += `<p>${JSON.stringify(obj)}</p>`
+                console.log(JSON.stringify(obj));
             } else {
-                content.innerHTML += `<p> Meta Data Recieved</p>`;
+                console.log('Meta Data Recieved');
             }
         };
 
         const sendPost = async (mediaForm) => {
+            //popUp();
             const nameAction = '/submitMedia';
             const nameMethod = 'post';
 
@@ -32,24 +33,27 @@
             const typeField = mediaForm.querySelector('input[name="med-type"]:checked');//req
             const genreField = mediaForm.querySelectorAll("input[type=checkbox]:checked");
             const progressField = mediaForm.querySelector('input[name="med-progress"]:checked');//req
+            const ratingField = mediaForm.querySelectorAll('input[name="med-rating"]');
             const addNotes = mediaForm.querySelector('#media-notes').value;
             // const img = mediaForm.querySelector('#title-img').src||"";
 
 
 
             let finalGenres = [];
+            let finalRating;
 
 
             console.log(addNotes);
 
-            for (let i = 0; i < genreField.length; i++) finalGenres.push(genreField[i].value)
-
+            for (let i = 0; i < genreField.length; i++) finalGenres.push(genreField[i].value);
+            for (var i = 0; i < ratingField.length; i++) {
+                if (ratingField[i].checked) finalRating = ratingField[i].value;
+            }
 
             const formData = `title=${titleField}&type=${typeField.value}&genres=${finalGenres}&notes=${addNotes}`;
-            // type=${typeField}&
-            // genre=${finalGenres}&
+
+
             // progress=${progressField}&
-            // notes=${addNotes}
 
             let response = await fetch(nameAction, {
                 method: nameMethod,
@@ -67,6 +71,7 @@
             let genres = document.querySelectorAll("input[type=checkbox]:checked");
             let type = document.querySelector('input[name="med-type"]:checked');
             let progress = document.querySelector('input[name="med-progress"]:checked');
+            let rating = document.querySelectorAll('input[name="med-rating"]:checked');
             let notes = document.querySelector('#media-notes');
 
 
@@ -75,15 +80,24 @@
             for (let i = 0; i < genres.length; i++) genres[i].checked = false;
             if (type != null) type.checked = false;
             if (progress != null) progress.checked = false;
+            if (rating != null) rating.checked = false;
             notes.value = "";
 
         };
+
+
 
         const init = () => {
 
             const submitButton = document.querySelector('#media-add-button');
             const clearButton = document.querySelector('#media-stop-button');
             const mediaForm = document.querySelector('.media-contain');
+
+            const titleField = mediaForm.querySelector('#title');
+            const typeField = mediaForm.querySelectorAll('input[name="med-type"]');
+            const progressField = mediaForm.querySelectorAll('input[name="med-progress"]');
+
+            const popAdd = document.querySelector('#pop-media-add');
 
             const submitButtonSumbit = (e) => {
 
@@ -93,14 +107,50 @@
 
                 return false;//prevents event bubbling
             };
+
+
+
+            const updateSubmitBtn = () => {
+                let typebool = false;
+                let progressbool = false;
+                for (const type of typeField) {
+                    if (type.checked) {
+                        typebool = true;
+                        break;
+                    }
+                }
+
+                for (const progress of progressField) {
+                    if (progress.checked) {
+                        progressbool = true;
+                        break;
+                    }
+                }
+                if (titleField.value.trim() !== "" && typebool && progressbool) {
+                    submitButton.removeAttribute('disabled');
+                } else {
+                    submitButton.setAttribute('disabled', 'disabled');
+                }
+            }
+
+            titleField.addEventListener('change', updateSubmitBtn);
+            for (let i = 0; i < typeField.length - 1; i++)  typeField[i].addEventListener('change', updateSubmitBtn);
+            for (let i = 0; i < progressField.length - 1; i++)   progressField[i].addEventListener('change', updateSubmitBtn);
+
+
+            popAdd.addEventListener('click', popUp);
             clearButton.addEventListener('click', clearFields);
             submitButton.addEventListener('click', submitButtonSumbit);
 
+
         };
 
+        const popUp = () => {
+            document.querySelector('#popup-1').classList.toggle('active');
+
+        }
+
         window.onload = init;
-        //disble submit button if required fields are blank || title, type, progress
-        //create pop-up or go to new page when data is submitted
 
     </script>
 </head>
@@ -114,20 +164,20 @@
     <div class="media-contain">
 
         <div class="col-1">
-            <a><img src="https://via.placeholder.com/200" width="100%" id="title-img"></a>
+            <a><img src="https://people.rit.edu/osl2877/430/Illustration3.jpg" width="100%" id="title-img"></a>
             <div class="small-img-row">
 
                 <div class="small-img-col">
-                    <a><img src="https://via.placeholder.com/200/808080" width="100%" class="small-img"></a>
+                    <a><img src="https://people.rit.edu/osl2877/430/Illustration4.jpg" width="100%" class="small-img"></a>
                 </div>
                 <div class="small-img-col">
-                    <a><img src="https://via.placeholder.com/200/FF0000" width="100%" class="small-img"></a>
+                    <a><img src="https://people.rit.edu/osl2877/430/Illustration.jpg" width="100%" class="small-img"></a>
                 </div>
                 <div class="small-img-col">
-                    <a><img src="https://via.placeholder.com/200/FFFFFF" width="100%" class="small-img"></a>
+                    <a><img src="https://people.rit.edu/osl2877/430/Illustration2.jpg" width="100%" class="small-img"></a>
                 </div>
                 <div class="small-img-col">
-                    <a><img src="https://via.placeholder.com/200" width="100%" class="small-img"></a>
+                    <a><img src="https://people.rit.edu/osl2877/430/Illustration3.jpg" width="100%" class="small-img"></a>
                 </div>
             </div>
         </div>
@@ -151,19 +201,25 @@
                             <li><input type="radio" name="med-type" id="film4" value="film4"><label for="film4">Film
                                     Type 4</label>
                             </li>
-
-
                         </ul>
                     </div>
 
                     <h3 id="media-title">Personal Progress</h3>
                     <div id="media-progress">
-                        <input type="radio" id="finsihed" name="med-progress" value="finsihed">
-                        <label for="finsihed">Finished</label><br>
-                        <input type="radio" id="ongoing" name="med-progress" value="ongoing">
-                        <label for="ongoing">Ongoing/Watching</label><br>
-                        <input type="radio" id="dropped" name="med-progress" value="dropped">
-                        <label for="dropped">Dropped</label>
+                        <ul class="progress-list">
+                            <li><input type="radio" id="finsihed" name="med-progress" value="finsihed">
+                                <label for="finsihed">Finished</label>
+                            </li>
+                            <li><input type="radio" id="ongoing" name="med-progress" value="ongoing">
+                                <label for="ongoing">Ongoing/Watching</label>
+                            </li>
+                            <li><input type="radio" id="dropped" name="med-progress" value="dropped">
+                                <label for="dropped">Dropped</label>
+                            </li>
+                            <li><input type="radio" id="other" name="med-progress" value="other">
+                                <label for="other">Other</label>
+                            </li>
+                        </ul>
                     </div>
 
 
@@ -179,10 +235,26 @@
                         </ul>
                     </div>
 
-                    <h3 id="media-title">Rating</h3>
-                    <div id="temp">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid laudantium necessitatibus
-                            voluptatibus fugiat quod id at hic, qui dicta iste.</p>
+                    <div class="rating-container">
+                        <h3 id="media-title">Rating</h3>
+                        <ul class="rating-list">
+                            <li><input type="radio" id="1start" name="med-rating" value="1start">
+                                <label for="1start">★</label>
+                            </li>
+                            <li><input type="radio" id="2star" name="med-rating" value="2star">
+                                <label for="2star">★★</label>
+                            </li>
+                            <li><input type="radio" id="3star" name="med-rating" value="3star">
+                                <label for="3star">★★★</label>
+                            </li>
+                            <li><input type="radio" id="4star" name="med-rating" value="4star">
+                                <label for="4star">★★★★</label>
+                            </li>
+                            <li><input type="radio" id="5star" name="med-rating" value="5star">
+                                <label for="5star">★★★★★</label>
+                            </li>
+
+                        </ul>
                     </div>
 
                     <textarea id="media-notes" name="text" rows="10" cols="110"
@@ -190,7 +262,23 @@
                 </form>
             </div>
             <button type="button" id="media-stop-button">Clear</button>
-            <button type="button" value='/submitMedia' id="media-add-button">Sumbit/Add</button>
+            <button type="button" disabled value='/submitMedia' id="media-add-button">Sumbit/Add</button>
+        </div>
+
+    </div>
+
+    <div class="popup" id="popup-1">
+        <div class="overlay">
+            <div class="popcontent">
+                <h1 id="pop-title">Media Added!</h1>
+                <p id="pop-text">Would you like to add another media? Or go to your library?</p>
+                <div id="pop-media-btns">
+                    <button type="button" class='pop-media-btn' id="pop-media-add">Add More</button>
+                    <button type="button" class='pop-media-btn' id="pop-media-library">Library</button>
+                </div>
+
+
+            </div>
         </div>
 
     </div>

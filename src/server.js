@@ -12,8 +12,8 @@ const urlStruct = {
     '/': htmlHandler.getIndex,
     '/style.css': htmlHandler.getCSS,
     '/library': htmlHandler.getLibrary, // libraryPage//getData
-    '/addMedia': htmlHandler.getMediaPage, 
-    '/getLibrary':jsonHandler.getLibrary,
+    '/addMedia': htmlHandler.getMediaPage,
+    '/getLibrary': jsonHandler.getLibrary,
     // media sent
     '/notFound': jsonHandler.notFound, // notFound/404
 
