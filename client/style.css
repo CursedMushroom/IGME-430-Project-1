@@ -11,8 +11,20 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+
 }
 
+#results{
+    overflow-y: auto;
+}
+#media-body {
+    background-color: rgb(55, 37, 73);
+    font-family: 'Rajdhani', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+
+}
 
 /* NavBar */
 .nav {
@@ -590,7 +602,9 @@ ul.rating-list li input[type="radio"] {
     display: flex;
     justify-content: space-around;
 }
-
+#no-data{
+    text-align: center;
+}
 .search-cri {
     width: 200px;
     height: 40px;
@@ -609,10 +623,17 @@ ul.rating-list li input[type="radio"] {
 }
 
 #element-card-holder {
-    overflow-y:auto;
+    overflow-y: auto;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-evenly;
     flex-wrap: wrap;
     gap: 12px;
 }
+
+#count{
+    margin-left:32px;
+    color:rgb(183,93,105);
+}
+
+

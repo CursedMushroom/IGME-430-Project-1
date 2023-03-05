@@ -2,33 +2,47 @@ const template = document.createElement("template");
 
 template.innerHTML = `
 <style>
-#image-main{
+#image-main {
     padding: 10px;
     float: left;
 }
+
 #title::first-letter {
-  text-transform:capitalize;
+    text-transform: capitalize;
 }
-#title{
-    font-size:24px;
-}
-.card{
-  height:300px;
-  width:600px;
-  overflow: auto;
-  background-color:rgb(119,76,96);
-}
-.card-content{
+
+#title {
     font-size: 24px;
-height: 150px; 
-margin:12px;
+    font-family: 'Phudu', cursive;
+    text-align:center;
+    color:rgb(234,205,194);
+    padding-top:12px;
+    padding-left:24px;
+}
+#rating{
+    color:rgb(234,205,194);
+}
+#notes{
+    color:rgb(183,93,105);
+}
+
+.card {
+    height: 300px;
+    width: 600px;
+    overflow: auto;
+    background-color: rgb(119, 76, 96);
+}
+
+.card-content {
+    font-size: 18px;
+    height: 150px;
+    margin: 12px;
+    color:rgb(26,20,35);
 
     display: inline-block;
 }
 
-.card-conten span{
-    padding-bottom:12px;
-}
+
 
   </style>
 

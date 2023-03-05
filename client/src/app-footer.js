@@ -11,6 +11,7 @@ footerTemplate.innerHTML = `<style>
     text-align:center;
     background-color:rgb(119,76,96);
     color:rgb(234,205,194);
+    
   }
   </style>
   <footer>???</footer>

@@ -49,10 +49,11 @@ const addMedia = (request, response, body) => {
 
   library[body.title].title = body.title;
   library[body.title].type = body.type;
+  library[body.title].progress = body.progress;
   library[body.title].img = body.img;
   if (body.genres && body.genres !== '') library[body.title].genres = body.genres;
   if (body.notes) library[body.title].notes = body.notes;
-  if (body.rating) library[body.title].notes = body.rating;
+  if (body.rating) library[body.title].rating = body.rating;
 
   if (responseCode === 201) {
     responseJSON.message = 'created successfully';

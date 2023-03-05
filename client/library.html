@@ -45,8 +45,9 @@
 
             if (JSON.stringify(obj) == '{"library":{}}') {
                 content.innerHTML = `
-                <h3>Look like there is nothing in your library! Go to Add Media to fill your library!</h3>
-                 <button onclick="window.location.href='/addMedia'" id="home-button">To Add Media</button>`
+                <div id='no-data'><h3>Look like there is nothing in your library! Go to Add Media to fill your library!</h3><br>
+                 <button onclick="window.location.href='/addMedia'" id="home-button">To Add Media</button></div>
+                `
             } else {
                 content.innerHTML += `<p>${JSON.stringify(obj)}</p>`
                 let elementCardHolder = document.querySelector("#element-card-holder");
@@ -63,13 +64,28 @@
                         //console.log("Key is " + k + ", value is " + item[k]);
                         //console.log(item[k].title);
                         let newCard = document.createElement("result-card");
-                        newCard.dataset.title = item[k].title;
-                        newCard.dataset.type = item[k].type;
-                        newCard.dataset.progress = item[k].progress;
-                        newCard.dataset.genres = item[k].genres;
-                        newCard.dataset.rating = item[k].rating;
-                        newCard.dataset.notes = item[k].notes;
-                        newCard.dataset.src = item[k].img;
+                        newCard.dataset.title = item[k].title;//req
+                        newCard.dataset.type = item[k].type;//req
+                        newCard.dataset.progress = item[k].progress;//req
+                        if (!item[k].genres) {
+                            newCard.dataset.genres = " ";
+                        }
+                        else {
+                            newCard.dataset.genres = item[k].genres;
+                        }
+                        if (!item[k].rating || item[k].rating == undefined) {
+                            newCard.dataset.rating = "not given";
+                        }
+                        else {
+                            newCard.dataset.rating = item[k].rating;
+                        }
+                        if (!item[k].notes) {
+                            newCard.dataset.notes = " ";
+                        }
+                        else {
+                            newCard.dataset.notes = item[k].notes;
+                        }
+                        newCard.dataset.src = item[k].img;//req
 
 
                         elementCardHolder.appendChild(newCard);
